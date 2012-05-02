@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include "sieve.h"
 
 int expand( int source[], int size );
 // Creates a list of bools where indeces indicates primes up to given num
@@ -52,10 +53,6 @@ int* primes( int num, int *pos ) {
 // Doubles the allocated array in size, preserves content
 // Returns new size
 int expand( int source[], int size ) {
-    //int* destination = (int*) malloc( (*size) * 2, sizeof( int ) );
-    //memcpy( destination, source, (*size) );
-    //free( source );
-    //source = destination;
     size *= 2;
     int *ret = realloc( source, size * sizeof( int ) );
     if( !ret )
