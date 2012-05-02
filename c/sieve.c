@@ -2,7 +2,7 @@
 // Creates a list of bools where indeces indicates primes up to given num
 int* sieve( int num ) {
     // Create initial list
-    int bools [ num ];
+    int* bools = (int*) malloc( num, sizeof( int ) );
 
     unsigned int i;
     unsigned int j;
@@ -23,11 +23,11 @@ int* sieve( int num ) {
 
 // Returns a list of primes (only)
 int* primes( int num, int *pos ) {
-    int (*sieve)[] = sieve( num );
+    int *sieve = sieve( num );
 
     *pos = 0;
     unsigned int primes_size = 10;
-    int primes[ primes_size ];
+    int* primes = (int*) malloc( primes_size, sizeof( int ) );
 
     unsigned int i;
     for( i = 0; i < num; ++i ) {
@@ -42,14 +42,13 @@ int* primes( int num, int *pos ) {
             }
         }
     }
-
     return primes;
 }
 
 // Doubles the allocated array in size, preserves content
 // Returns new size
 int expand( int source[], int size ) {
-    int destination[ (*size) * 2 ];
+    int* destination = (int*) malloc( (*size) * 2, sizeof( int ) );
     memcpy( destination, source, (*size) );
     free( source );
     source = destination;
