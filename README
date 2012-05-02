@@ -1,0 +1,17 @@
+GPL v2 licenced
+
+Directories & filenames should follow this structure:
+
+LANG/TYPE
+
+Example:
+
+Sieve prime generator in python:
+
+python/sieve.py
+
+Stack construct in C:
+
+c/stack.h and c/stack.c
+
+All directory and file names in lowercase.
