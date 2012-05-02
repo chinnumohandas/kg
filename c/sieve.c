@@ -1,12 +1,12 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "sieve.h"
 
-int expand( int source[], int size );
 // Creates a list of bools where indeces indicates primes up to given num
 int* sieve( int num ) {
     // Create initial list
-    int* bools = (int*) malloc( num * sizeof( int ) );
+    int* bools = malloc( num * sizeof( int ) );
 
     unsigned int i;
     unsigned int j;
@@ -31,33 +31,34 @@ int* primes( int num, int *pos ) {
 
     *pos = 0;
     unsigned int primes_size = 10;
-    int* primes = (int*) malloc( primes_size * sizeof( int ) );
+    int* primes = malloc( primes_size * sizeof( int ) );
 
     unsigned int i;
-    for( i = 0; i < num; ++i ) {
+    for( i = 1; i < num; ++i ) {
         // prime
         if( sievelist[ i ] ) {
             primes[ *pos ] = i;
             ++(*pos);
 
             // Increases array size 
-            if( (*pos) == primes_size ) {
-                primes_size = expand( primes, primes_size );
-            }
+            if( (*pos) == primes_size )
+                primes_size = expand( &primes, primes_size );
         }
     }
     free( sievelist );
-    return primes;
+    return ( &primes[ 0 ] );
 }
 
 // Doubles the allocated array in size, preserves content
 // Returns new size
-int expand( int source[], int size ) {
+int expand( int **source, int size ) {
     size *= 2;
-    int *ret = realloc( source, size * sizeof( int ) );
-    if( !ret )
+    int *ret = realloc( *source, size * sizeof( int ) );
+    if( !ret ) {
+        fprintf( stderr, "out of memory or other memory error.\n", size );
         exit( 1 );
-        //printf( "Realloc failed! Handle please.\n" );
-    free( ret );
+    }
+    else *source = ret;
+
     return size;
 }
