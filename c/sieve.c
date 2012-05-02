@@ -1,6 +1,6 @@
 #include <string.h>
 // Creates a list of bools where indeces indicates primes up to given num
-int sieve( int num ) {
+int* sieve( int num ) {
     // Create initial list
     int bools [ num ];
 
@@ -18,31 +18,32 @@ int sieve( int num ) {
                 bools[ j ] = 0;
         }
     }
-    return bools;
+    return ( &bools[ 0 ] );
 }
 
 // Returns a list of primes (only)
-int primes( int num, int *result_size ) {
-    *result_size = 0;
-    int (*sieve)[] = sieve( num );
+int* primes( int num, int *pos ) {
+    int (*sieve)[] = sieve( num );
 
-    unsigned int pos = 0;
+    *pos = 0;
     unsigned int primes_size = 10;
     int primes[ primes_size ];
 
     unsigned int i;
     for( i = 0; i < num; ++i ) {
         // prime
-        if( sieve[ i ] ) {
-            primes[ pos ] = i;
-            ++pos;
+        if( sieve[ i ] ) {
+            primes[ *pos ] = i;
+            ++(*pos);
 
             // Increases array size 
-            if( pos == primes_size ) {
+            if( (*pos) == primes_size ) {
                 primes_size = expand( primes, primes_size );
             }
         }
     }
+
+    return primes;
 }
 
 // Doubles the allocated array in size, preserves content
