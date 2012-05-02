@@ -45,6 +45,7 @@ int* primes( int num, int *pos ) {
             }
         }
     }
+    free( sievelist );
     return primes;
 }
 
@@ -56,9 +57,10 @@ int expand( int source[], int size ) {
     //free( source );
     //source = destination;
     size *= 2;
-    int *ret = realloc( source, size );
+    int *ret = realloc( source, size * sizeof( int ) );
     if( !ret )
         exit( 1 );
         //printf( "Realloc failed! Handle please.\n" );
+    free( ret );
     return size;
 }
