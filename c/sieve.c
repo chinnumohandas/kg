@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
+
+int expand( int source[], int size );
 // Creates a list of bools where indeces indicates primes up to given num
 int* sieve( int num ) {
     // Create initial list
@@ -24,7 +26,7 @@ int* sieve( int num ) {
 
 // Returns a list of primes (only)
 int* primes( int num, int *pos ) {
-    int *sieve = sieve( num );
+    int *sievelist = sieve( num );
 
     *pos = 0;
     unsigned int primes_size = 10;
@@ -33,7 +35,7 @@ int* primes( int num, int *pos ) {
     unsigned int i;
     for( i = 0; i < num; ++i ) {
         // prime
-        if( sieve[ i ] ) {
+        if( sievelist[ i ] ) {
             primes[ *pos ] = i;
             ++(*pos);
 
@@ -54,6 +56,9 @@ int expand( int source[], int size ) {
     //free( source );
     //source = destination;
     size *= 2;
-    realloc( source, size );
+    int *ret = realloc( source, size );
+    if( !ret )
+        exit( 1 );
+        //printf( "Realloc failed! Handle please.\n" );
     return size;
 }
