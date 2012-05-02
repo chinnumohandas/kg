@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sieve.h"
+#include "list.h"
 
 // Creates a list of bools where indeces indicates primes up to given num
 int* sieve( int num ) {
@@ -47,18 +48,4 @@ int* primes( int num, int *pos ) {
     }
     free( sievelist );
     return ( &primes[ 0 ] );
-}
-
-// Doubles the allocated array in size, preserves content
-// Returns new size
-int expand( int **source, int size ) {
-    size *= 2;
-    int *ret = realloc( *source, size * sizeof( int ) );
-    if( !ret ) {
-        fprintf( stderr, "out of memory or other memory error.\n", size );
-        exit( 1 );
-    }
-    else *source = ret;
-
-    return size;
 }
