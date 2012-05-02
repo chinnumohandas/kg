@@ -1,8 +1,9 @@
+#include <stdlib.h>
 #include <string.h>
 // Creates a list of bools where indeces indicates primes up to given num
 int* sieve( int num ) {
     // Create initial list
-    int* bools = (int*) malloc( num, sizeof( int ) );
+    int* bools = (int*) malloc( num * sizeof( int ) );
 
     unsigned int i;
     unsigned int j;
@@ -27,7 +28,7 @@ int* primes( int num, int *pos ) {
 
     *pos = 0;
     unsigned int primes_size = 10;
-    int* primes = (int*) malloc( primes_size, sizeof( int ) );
+    int* primes = (int*) malloc( primes_size * sizeof( int ) );
 
     unsigned int i;
     for( i = 0; i < num; ++i ) {
@@ -48,9 +49,11 @@ int* primes( int num, int *pos ) {
 // Doubles the allocated array in size, preserves content
 // Returns new size
 int expand( int source[], int size ) {
-    int* destination = (int*) malloc( (*size) * 2, sizeof( int ) );
-    memcpy( destination, source, (*size) );
-    free( source );
-    source = destination;
-    return size * 2;
+    //int* destination = (int*) malloc( (*size) * 2, sizeof( int ) );
+    //memcpy( destination, source, (*size) );
+    //free( source );
+    //source = destination;
+    size *= 2;
+    realloc( source, size );
+    return size;
 }
