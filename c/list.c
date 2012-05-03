@@ -41,3 +41,14 @@ void append( int **source, int *last, int *size, int elem ) {
         (*size) = expand( source, *size );
     (*source)[ *last ] = elem;
 }
+
+// Returns the last element and removes it
+int pop( int **source, int *last, int *size ) {
+    int retval = (*source)[ (*last ) ];
+    --(*last);
+
+    if( (*last) == (*size) / 4 )
+        (*size) = reduce( source, *size );
+
+    return retval;
+}
