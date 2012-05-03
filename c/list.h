@@ -3,3 +3,4 @@
 
 int expand( int **source, int size );
 int reduce( int **source, int size );
+void append( int **source, int *last, int *size, int elem );
