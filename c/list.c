@@ -9,7 +9,7 @@ int expand( int **source, int size ) {
     size *= 2;
     int *ret = realloc( *source, size * sizeof( int ) );
     if( !ret ) {
-        fprintf( stderr, "out of memory or other memory error.\n", size );
+        fprintf( stderr, "out of memory or other memory error.\n" );
         exit( 1 );
     }
     else *source = ret;
@@ -22,7 +22,7 @@ int reduce( int **source, int size ) {
     int *ret = realloc( *source, size * sizeof( int ) );
 
     if( !ret ) {
-        fprintf( stderr, "out of memory or other memory error.\n", size );
+        fprintf( stderr, "out of memory or other memory error.\n" );
         exit( 1 );
     }
     else *source = ret;
