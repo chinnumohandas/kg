@@ -30,10 +30,14 @@ int reduce( int **source, int size ) {
     return size;
 }
 
+/* Idea: offer struct to hold last/size values (and optional function pointer?)
+ * in order to deal with pre-increment first element problem
+ */
+
 void append( int **source, int *last, int *size, int elem ) {
     ++(*last);
     // handle possible overflow
     if( (*last) == (*size) )
         (*size) = expand( source, *size );
-    *source[ *last ] = elem;
+    (*source)[ *last ] = elem;
 }
