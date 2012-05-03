@@ -5,3 +5,4 @@ int expand( int **source, int size );
 int reduce( int **source, int size );
 void append( int **source, int *last, int *size, int elem );
 int pop( int **source, int *last, int *size );
+int* concatenate( int *first, int fsize, int *second, int ssize, int *size );

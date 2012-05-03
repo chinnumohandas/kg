@@ -52,3 +52,18 @@ int pop( int **source, int *last, int *size ) {
 
     return retval;
 }
+
+// Concatenates the two lists
+// Destroyes the two passed arrays
+int* concatenate( int *first, int fsize, int *second, int ssize, int *size ) {
+    (*size) = fsize + ssize + 2;
+    char* cated = calloc( sizeof( int ), (*size) * sizeof( int ) );
+
+    memcpy( cated, first, ( fsize + 1 ) * sizeof( int ) ); 
+    memcpy( cated + ( ( fsize + 1 ) * sizeof( int ) ), second, ssize * sizeof( int ) ); 
+
+    free( first );
+    free( second );
+
+    return (int*)cated;
+}
