@@ -54,16 +54,13 @@ int pop( int **source, int *last, int *size ) {
 }
 
 // Concatenates the two lists
-// Destroyes the two passed arrays
-int* concatenate( int *first, int fsize, int *second, int ssize, int *size ) {
-    (*size) = fsize + ssize + 2;
-    char* cated = calloc( sizeof( int ), (*size) * sizeof( int ) );
+// Does not destroy the two passed arrays, must be freed manually
 
-    memcpy( cated, first, ( fsize + 1 ) * sizeof( int ) ); 
-    memcpy( cated + ( ( fsize + 1 ) * sizeof( int ) ), second, ssize * sizeof( int ) ); 
+void* concatenate( const void *first, int fsize, const void *second, int ssize, size_t s ) {
 
-    free( first );
-    free( second );
+    char *cat = malloc( s * ( fsize + ssize ) );
+    memcpy( cat, first, fsize * s );
+    memcpy( cat + fsize * s, second, ssize * s );
 
-    return (int*)cated;
+    return cat;
 }
