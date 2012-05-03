@@ -43,19 +43,19 @@ void append( int **source, int *last, int *size, int elem ) {
 }
 
 // Returns the last element and removes it
-int pop( int **source, int *last, int *size ) {
-    int retval = (*source)[ (*last ) ];
+int pop( int *source, int *last, int *size ) {
+
+    int retval = source[ (*last) ];
     --(*last);
 
     if( (*last) == (*size) / 4 )
-        (*size) = reduce( source, *size );
+        (*size) = reduce( &source, *size );
 
     return retval;
 }
 
 // Concatenates the two lists
 // Does not destroy the two passed arrays, must be freed manually
-
 void* concatenate( const void *first, int fsize, const void *second, int ssize, size_t s ) {
 
     char *cat = malloc( s * ( fsize + ssize ) );

@@ -8,7 +8,7 @@
 int expand( int **source, int size );
 int reduce( int **source, int size );
 void append( int **source, int *last, int *size, int elem );
-int pop( int **source, int *last, int *size );
+int pop( int *source, int *last, int *size );
 
 // example call: concat( int, first, firstsize, second, secondsize )
 void* concatenate( const void *first, int fsize, const void *second, int ssize, size_t s );
