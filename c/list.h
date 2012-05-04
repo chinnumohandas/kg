@@ -5,7 +5,11 @@
 #define concat(TYPE, first, firstn, second, secondn) \
       (TYPE *)concatenate( (const void *)(first), (firstn), (const void *)(second), (secondn), sizeof(TYPE) );
 
-int expand( int **source, int size );
+#define expand(TYPE, source, size) \
+    expand_array( (void *)(source), (size), sizeof(TYPE) );
+
+//int expand( int **source, int size );
+int expand_array( void *source, int size, size_t s );
 int reduce( int **source, int size );
 void append( int **source, int *last, int *size, int elem );
 int pop( int *source, int *last, int *size );
