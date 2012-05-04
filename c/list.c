@@ -5,17 +5,6 @@
 
 // Doubles the allocated array in sizes, preserves content
 // Returns new size
-/*int expand( int **source, int size ) {
-    size *= 2;
-    int *ret = realloc( *source, size * sizeof( int ) );
-    if( !ret ) {
-        fprintf( stderr, "out of memory or other memory error.\n" );
-        exit( 1 );
-    }
-    else *source = ret;
-
-    return size;
-}*/
 
 int expand_array( void *source, int size, size_t s ) {
     size *= 2;
@@ -29,15 +18,15 @@ int expand_array( void *source, int size, size_t s ) {
     return size;
 }
 
-int reduce( int **source, int size ) {
+int reduce_array( void *source, int size, size_t s ) {
     size /= 2;
-    int *ret = realloc( *source, size * sizeof( int ) );
+    void *ret = realloc( source, size * s );
 
     if( !ret ) {
         fprintf( stderr, "out of memory or other memory error.\n" );
         exit( 1 );
     }
-    else *source = ret;
+    else source = ret;
 
     return size;
 }

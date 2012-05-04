@@ -8,9 +8,13 @@
 #define expand(TYPE, source, size) \
     expand_array( (void *)(source), (size), sizeof(TYPE) );
 
-//int expand( int **source, int size );
+#define reduce(TYPE, source, size) \
+    expand_array( (void *)(source), (size), sizeof(TYPE) );
+
+
 int expand_array( void *source, int size, size_t s );
-int reduce( int **source, int size );
+int reduce_array( void *source, int size, size_t s );
+
 void append( int **source, int *last, int *size, int elem );
 int pop( int *source, int *last, int *size );
 
