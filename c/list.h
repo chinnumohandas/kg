@@ -11,11 +11,10 @@
 #define reduce(TYPE, source, size) \
     expand_array( (void *)(source), (size), sizeof(TYPE) );
 
-
 int expand_array( void *source, int size, size_t s );
 int reduce_array( void *source, int size, size_t s );
 
-void append( int **source, int *last, int *size, int elem );
+void append( int *source, int *last, int *size, int elem );
 int pop( int *source, int *last, int *size );
 
 // example call: concat( int, first, firstsize, second, secondsize )

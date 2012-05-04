@@ -35,12 +35,12 @@ int reduce_array( void *source, int size, size_t s ) {
  * in order to deal with pre-increment first element problem
  */
 
-void append( int **source, int *last, int *size, int elem ) {
+void append( int *source, int *last, int *size, int elem ) {
     ++(*last);
     // handle possible overflow
     if( (*last) == (*size) )
-        (*size) = expand( source, *size );
-    (*source)[ *last ] = elem;
+        (*size) = expand(int, &source, *size );
+    source[ *last ] = elem;
 }
 
 // Returns the last element and removes it
@@ -50,7 +50,7 @@ int pop( int *source, int *last, int *size ) {
     --(*last);
 
     if( (*last) == (*size) / 4 )
-        (*size) = reduce( &source, *size );
+        (*size) = reduce(int, &source, *size );
 
     return retval;
 }
