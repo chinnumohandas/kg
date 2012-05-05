@@ -39,7 +39,7 @@ void append( int *source, int *last, int *size, int elem ) {
     ++(*last);
     // handle possible overflow
     if( (*last) == (*size) )
-        (*size) = expand(int, &source, *size );
+        (*size) = expand(int, source, *size );
     source[ *last ] = elem;
 }
 
@@ -50,7 +50,7 @@ int pop( int *source, int *last, int *size ) {
     --(*last);
 
     if( (*last) == (*size) / 4 )
-        (*size) = reduce(int, &source, *size );
+        (*size) = reduce(int, source, *size );
 
     return retval;
 }
