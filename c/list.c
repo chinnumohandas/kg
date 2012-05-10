@@ -35,13 +35,13 @@ int reduce_array( void *source, int size, size_t s ) {
  * in order to deal with pre-increment first element problem
  */
 
-void append( int *source, int *last, int *size, int elem ) {
+/*void append( int *source, int *last, int *size, int elem ) {
     ++(*last);
     // handle possible overflow
     if( (*last) == (*size) )
         (*size) = expand(int, source, *size );
     source[ *last ] = elem;
-}
+}*/
 
 // Returns the last element and removes it
 int pop( int *source, int *last, int *size ) {
@@ -50,9 +50,21 @@ int pop( int *source, int *last, int *size ) {
     --(*last);
 
     if( (*last) == (*size) / 4 )
-        (*size) = reduce(int, source, *size );
+        printf( "removed\n" );
+        //(*size) = reduce(int, source, *size );
 
     return retval;
+}
+
+int* expand( int *source, int *alloc ) {
+    *alloc *= 2;
+    int *ret = realloc( source, (*alloc) * sizeof( int ) );
+
+    if( !ret ) {
+        fprintf( stderr, "out of memory or other memory error\n" );
+        exit( 1 );
+    }
+    else return ret;
 }
 
 // Concatenates the two lists
@@ -64,4 +76,28 @@ void* concatenate( const void *first, int fsize, const void *second, int ssize, 
     memcpy( cat + fsize * s, second, ssize * s );
 
     return cat;
+};
+
+list* init_list() {
+    list *list = malloc( sizeof( list ) );
+    list->alloc = DEFAULTSIZE;
+    /* Size points to last index */
+    list->size = -1;
+    list->array = calloc( sizeof( int ) * list->alloc, sizeof( int ) );
+    return list;
+}
+
+void append( list *list, int elem ) {
+    ++( list->size );
+    if( list->size == list->alloc )
+        list->array = expand( list->array, &(list->size) );
+        //list->array = expand( &(list->array), &(list->size) );
+    list->array[ list->size ] = elem;
+}
+
+int at( list *list, int pos ){
+    if( pos <= list->size && pos > -1 )
+        return list->array[ pos ];
+    else
+        exit( 1 );
 }
