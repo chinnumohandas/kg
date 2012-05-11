@@ -4,12 +4,20 @@
 // QUICKSORT
 // Sorts in-place
 template <class T> void quicksort( std::vector< T > *list );
+template <class T> void quicksort( std::vector< T > *list, int left, int right );
 template <class T> int partition( std::vector< T > *list, int left, int right, int pivotIndex );
 template <class T> void swap ( T& a, T& b );
 
+// INSERTION SORT
 template <class T> void insertionsort( std::vector< T > *list );
+template <class T> void insertionsort( std::vector< T > *list, int left, int right );
+
+template <class T> void quicksort( std::vector< T > *list ) {
+    quicksort( list, 0, list->size() - 1 );
+}
 
 template <class T> void quicksort( std::vector< T > *list, int left, int right ) {
+
     if( left < right ){
         // Choose pivot
         int pivot = ( rand() % ( right + 1 ) ) + left;
@@ -44,9 +52,13 @@ template <class T> void swap ( T& a, T& b )
 }
 
 template <class T> void insertionsort( std::vector< T > *list ) {
-    unsigned int i;
+    insertionsort( list, 0, list->size() - 1 );
+}
+
+template <class T> void insertionsort( std::vector< T > *list, int left, int right ) {
+    int i;
     // Saves list[i] in order to make a hole in the list
-    for( i = 0; i < list->size(); ++i ){
+    for( i = left; i < right; ++i ){
         T item = list->at( i );
         unsigned int indexHole = i;
 
