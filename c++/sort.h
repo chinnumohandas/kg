@@ -7,6 +7,8 @@ template <class T> void quicksort( std::vector< T > *list );
 template <class T> int partition( std::vector< T > *list, int left, int right, int pivotIndex );
 template <class T> void swap ( T& a, T& b );
 
+template <class T> void insertionsort( std::vector< T > *list );
+
 template <class T> void quicksort( std::vector< T > *list, int left, int right ) {
     if( left < right ){
         // Choose pivot
@@ -39,4 +41,21 @@ template <class T> int partition( std::vector< T > *list, int left, int right, i
 template <class T> void swap ( T& a, T& b )
 {
       T c( a ); a = b; b = c;
+}
+
+template <class T> void insertionsort( std::vector< T > *list ) {
+    unsigned int i;
+    // Saves list[i] in order to make a hole in the list
+    for( i = 0; i < list->size(); ++i ){
+        T item = list->at( i );
+        unsigned int indexHole = i;
+
+        // move hole to the next smaller index
+        while( indexHole > 0 && list->at( indexHole - 1 ) > item ) {
+            list->at( indexHole ) = list->at( indexHole - 1 );
+            --indexHole;
+        }
+        // put the item in the hole
+        list->at( indexHole ) = item;
+    }
 }
